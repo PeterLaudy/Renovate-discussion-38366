@@ -1,23 +1,7 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "config:recommended",
-        "schedule:daily",
-        "group:allNonMajor",
-        ":preserveSemverRanges"
-    ],
-    "lockFileMaintenance": {
-        "enabled": true
-    },
-    "baseBranches": [
-        "main"
-    ],
     "ignorePaths": [
-        "**/node_modules/**",
-        "**/test/**",
-        "**/tests/**"
+        ".git/**"
     ],
-    "gradle": { "enabled": true },
 
     "packageRules": [
         {
