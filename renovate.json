@@ -5,13 +5,6 @@
 
     "packageRules": [
         {
-            "description": "The main rule to disable every update by default",
-            "matchFileNames": [ "*" ],
-            "matchPackageNames": [ "*" ],
-            "matchUpdateTypes": [ "*" ],
-            "enabled": false
-        },
-        {
             "description": "Enable non-major updates of all log4j packages in the libs.versions.toml file.",
             "groupName": "Non-major update for log4j",
             "matchFileNames": [ "/libs.versions.toml" ],
