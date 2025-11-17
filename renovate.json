@@ -12,9 +12,10 @@
             "enabled": false
         },
         {
-            "description": "Enable non-major updates of all log4j packages in the libs.versions.toml file.",
+            "description": "Enable non-major updates of all packages in the libs.versions.toml file.",
             "groupName": "Non-major updates in libs.versions.toml",
             "matchFileNames": [ "libs.versions.toml" ],
+            "matchPackageNames": [ "*" ],
             "matchUpdateTypes": [ "minor", "patch" ],
             "enabled": true
         }
