@@ -1,0 +1,8 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // Global dependencies
+    implementation(com.netflix.nebula:gradle-ospackage-plugin:11.10.1)
+}
