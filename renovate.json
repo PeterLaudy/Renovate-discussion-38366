@@ -6,17 +6,21 @@
     "packageRules": [
         {
             "description": "The main rule to disable every update by default",
-            "matchFileNames": [ "*" ],
-            "matchPackageNames": [ "*" ],
-            "matchUpdateTypes": [ "*" ],
+            "matchPackageNames": [ "/.*/" ],
             "enabled": false
         },
         {
             "description": "Enable non-major updates of all packages in the libs.versions.toml file.",
             "groupName": "Non-major updates in libs.versions.toml",
             "matchFileNames": [ "libs.versions.toml" ],
-            "matchPackageNames": [ "*" ],
+            "matchPackageNames": [ "/^org\\.apache\\.logging\\.log4j\\:log4j.*$/" ],
             "matchUpdateTypes": [ "minor", "patch" ],
+            "enabled": true
+        },
+        {
+            "description": "Enable updates from the Project/build.gradle file.",
+            "matchFileNames": [ "Project/build.gradle" ],
+            "matchPackageNames": [ "/^.*netflix.*$/" ],
             "enabled": true
         }
     ]
