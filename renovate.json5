@@ -1,0 +1,119 @@
+/*
+███████████████████████████████████████████████████████████████████
+█ Renovate configuration file for PRISMAsync.                     █
+█ It is a JSON5 file so it can contain comments.                  █
+█                                                                 █
+█ Since there are so many different package systems used by the   █
+█ different subsystems and teams, the default action is to NOT    █
+█ update any package.                                             █
+█                                                                 █
+█ When you update this file because you want renovate to keep a   █
+█ package updated in this repository, make sure you keep that     █
+█ in mind. So please keep the scope of your changes as small as   █
+█ possible and NEVER cross subsystem boundaries. Every team has   █
+█ their own responsibility when it comes to updating packages.    █
+███████████████████████████████████████████████████████████████████
+*/
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        "schedule:daily",
+        "group:allNonMajor",
+        ":preserveSemverRanges"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "baseBranches": [
+        "main"
+    ],
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/test/**",
+        "**/tests/**",
+        ".git/**"
+    ],
+    "azureWorkItemId": 684270,
+    "azureAutoComplete": false,
+    "platformAutomerge": false,
+    "prHourlyLimit": 0,
+    "prConcurrentLimit": 0,
+
+//  ███████████████████████████████████████████████████████████████████
+//  █ Here you probably need to make changes if you want renovate to  █
+//  █ update another package for you.                                 █
+//  █                                                                 █
+//  █ Each team should create its own section to store their rules.   █
+//  █ DON'T CHANGE RULES THAT DO NOT BELONG TO YOUR TEAM!!!!          █
+//  █ This is the exception to the rule that code duplication is bad. █
+//  █ Trying to keep the number of rules to a minimum will be very    █
+//  █ bad for maintenance of this file.                               █
+//  █                                                                 █
+//  █ This does ask that you keep the rules for your team together    █
+//  █ and document what each rule does. Since you will not make a lot █
+//  █ of changes to this file, that shouldn't be a problem.           █
+//  ███████████████████████████████████████████████████████████████████
+    "packageRules": [
+        {
+//  █████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+//  █ Don't remove any of the match operators in this first rule. Because of a bug in Renovate they are all needed. █
+//  █ If you remove any of them, the updates to libs.versions.toml will not work anymore.                           █
+//  █ If the bug is solved, all match operators except the matchPackageNames operator can be removed.               █
+//  █ The link to the bug is https://github.com/renovatebot/renovate/discussions/38366                              █
+//  █████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+
+            // This should be the first rule, as the order of rules matter for Renovate.
+            "description": "The main rule to disable every update by default",
+            "matchFileNames": [ "*" ],
+            "matchPackageNames": [ "*"],
+            "matchUpdateTypes": [ "*" ],
+            "enabled": false
+        },
+
+//  ██████████████████████████████████████████████████████████████████████████████████
+//  █ Start of the section containing rules maintained by PRINT-UI                   █
+//  █ Please contact PRINT-UI if you think these rules are causing you any problems. █
+//  ██████████████████████████████████████████████████████████████████████████████████
+        {
+            // Because of a bug in Renovate (see first rule) any rule that updates libraries in libs.versions.toml
+            // must contain the exact same match operators as the first rule which disables all updates.
+            // The values for these match operators can of course be different.
+            "description": "Enable patch updates of all packages in the libs.versions.toml file.",
+            "groupName": "Patch updates in libs.versions.toml",
+            "matchFileNames": [ "libs.versions.toml" ],
+            "matchPackageNames": [ "*"],
+            "matchUpdateTypes": [ "patch" ],
+            "enabled": true
+        },
+        {
+            // Because of a bug in Renovate (see first rule) any rule that updates libraries in libs.versions.toml
+            // must contain the exact same match operators as the first rule which disables all updates.
+            // The values for these match operators can of course be different.
+            "description": "Enable minor updates of all packages in the libs.versions.toml file.",
+            "groupName": "Minor updates in libs.versions.toml",
+            "matchFileNames": [ "libs.versions.toml" ],
+            "matchPackageNames": [ "*"],
+            "matchUpdateTypes": [ "minor" ],
+            "enabled": true
+        },
+        {
+            // Rule to disable certain java libraries. Currently these are: jetty, axis2, struts and miglayout
+            "description": "Disable specific java libraries.",
+            "matchPackageNames": [ "/^(org\\.eclipse\\.jetty:jetty|org\\.apache\\.axis2:axis2|struts:struts|com\\.miglayout:miglayout).*$/"],
+            "enabled": false
+        },
+        {
+            // Axiom minor update to 1.3.0 seems to have breaking changes to the API.
+            // Compatability has not been tested, but for now minor updates are also disabled.
+            "description": "Disable axiom java libraries.",
+            "matchPackageNames": [ "/^org\\.apache\\.ws\\.commons\\.axiom:axiom-.*$/"],
+            "matchUpdateTypes": [ "minor" ],
+            "enabled": false
+        }
+//  ██████████████████████████████████████████████████████████████████████████████████
+//  █ End of the section containing rules maintained by PRINT-UI                     █
+//  █ Please contact PRINT-UI if you think these rules are causing you any problems. █
+//  ██████████████████████████████████████████████████████████████████████████████████
+    ]
+}
