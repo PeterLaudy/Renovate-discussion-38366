@@ -37,6 +37,7 @@
     "azureWorkItemId": 684270,
     "azureAutoComplete": false,
     "platformAutomerge": false,
+    "recreateWhen": "always",
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
 
